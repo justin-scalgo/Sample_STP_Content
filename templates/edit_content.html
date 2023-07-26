@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>{{ cms_content.title }}</h2>
+<p>{{ cms_content.description }}</p>
+
+
+  
+
 <h2>Edit Content</h2>
 <form method="post">
   {% csrf_token %}

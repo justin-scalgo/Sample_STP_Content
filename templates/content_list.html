@@ -1,20 +1,61 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Content List</h2>
-<ul>
-  {% for content in contents %}
-    <li>
-      <strong>{{ content.title }}</strong><br>
-      <em>Created: {{ content.created_date }}</em><br>
-      {{ content.description }}
-      <br>
-      <a href="{% url 'edit_content' content.pk %}">Edit</a> <br>
-      <a href="{% url 'delete_content' content.pk %}">Delete</a><br><br>
-    </li>
-  {% empty %}
-    <li>No content available.</li>
-  {% endfor %}
-</ul><br>
-<a href="{% url 'add_content' %}">Add Content</a>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+</style>
+<button id="open-modal">Add</button>
+<center class="content-container">
+    <h2>CMS Content List</h2>
+    
+    <table id="content-table">
+
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+            {% for item in contents %}
+            <tr id="row_{{item.id}}" >
+                <td>{{ item.title }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.createdDate }}</td>
+                <td><a href="#" class="edit" data-id="{{ item.id }}">Edit</a></td>
+                <td><a href="#" class="delete" data-id="{{ item.id }}">Delete</a></td>
+            </tr>
+            {% empty %}
+            <li>Empty list</li>
+            {% endfor %}
+        <!-- <a href="#" id="open-modal">Add</a> -->
+        
+    </table>
+</center>
+
+<!-- <div id="myModal" class="modal">
+    <div class="modal-content">
+        <h2>Modal Title</h2>
+        <p>This is the modal content</p>
+        <button id="close-modal">Close</button>
+    </div>
+</div> -->
 {% endblock %}
